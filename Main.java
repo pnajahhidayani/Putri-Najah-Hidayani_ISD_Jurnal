@@ -1,69 +1,41 @@
-import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+        QueueLL<String> queue = new QueueLL<>();
+
+        Scanner in = new Scanner(System.in);
+        int opsi = 0;
+
+        while (opsi != 4) {
+            //klo opsi yg dipilih 1-4, print ini
+            System.out.println("1. Masukan data");
+            System.out.println("2. Hapus data");
+            System.out.println("3. Print data");
+            System.out.println("4. Done");
+            opsi = in.nextInt();
+
+            if (opsi == 1) {
+                System.out.println("Masukan TO DO");
+                String toDo = in.next();
+                //buat masukin data pake enqueue yg first in first out
+                queue.enqueue(toDo);
+                System.out.println();
+            }
+            else if (opsi == 2) {
+                //hapus todo yg pertama kali ditambah
+                queue.dequeue();
+                System.out.println("Todo telah dihapus");
+                System.out.println();
+            }
+            else if (opsi == 3) {
+                //print data yang udh dihapus atau data yg ada
+                queue.printQueue();
+                System.out.println();
+            }
+        }
         
-        LinkedList<Lagu> listLagu = new LinkedList<Lagu>();
-        Scanner input = new Scanner(System.in);
-
-            int choose, i = 0;
-            listLagu.add(new Lagu("2002", "Anne Marie"));
-            listLagu.add(new Lagu("Secret", "Monsta X"));
-
-            do {
-                System.out.println("Menu: " + "\n1. Add Song" + "\n2. Delete Latest Song" + "\n3. Delete" + "\n4. Playlist" + "\n5. Play");
-
-                choose = input.nextInt();
-
-                if (choose == 1) {
-                    System.out.println("Add song and singer");
-                    String judulLagu = input.next();
-                    String penyanyi = input.next();
-                    listLagu.add(new Lagu(judulLagu, penyanyi));
-                }
-                if (choose == 2){
-                    System.out.println("Delete Latest Song");
-                    int index = listLagu.size() - 1;
-                    listLagu.remove(index);
-                }
-                if (choose == 3) {
-                    System.out.println("Delete");
-                    String judulLagu = input.next();
-                    ListIterator<Lagu> iterator = listLagu.listIterator();
-                    while (iterator.hasNext()){
-                        Lagu ob = iterator.next();
-                        if (ob.getJudulLagu().equals(judulLagu)) {
-                            iterator.remove();     
-                        }
-                    }
-                }
-                if (choose == 4){
-                    ListIterator<Lagu> iterator = listLagu.listIterator();
-                    System.out.println("Playlist : ");
-                    while (iterator.hasNext()){
-                        System.out.println(iterator.next());
-                    }
-                    System.out.println();
-                }
-            }
-            while (choose != 5);
-
-            ListIterator<Lagu> iterator = listLagu.listIterator();
-            System.out.println("Play");
-            System.out.println("\"");
-            while (iterator.hasNext()){
-                System.out.println(iterator.next());
-
-            }
-            System.out.print("\"");
-            System.out.println();
-            System.out.print("\"");
-            while (iterator.hasPrevious()){
-                System.out.println(iterator.previous());
-            }
-            System.out.print("\"");
     }
-}
     
+}
